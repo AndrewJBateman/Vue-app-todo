@@ -1,3 +1,5 @@
+<!-- Start with in-built barebones html5 template -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,28 +9,46 @@
 	<style>
 		.done {
 			text-decoration: line-through;
+			color: green;
 		}
+
+		::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: blue;
+  opacity: 1; /* Firefox */
+}
 	</style>
 
 </head>
 <body>
 	<main id="app">
-		<h3>{{title}}</h3>
+		<h3>{{ title }}</h3>
+
+		<!-- 
+			at submit call addTodo function
+			v-model shows typed text from input box listed as a new todo
+		-->
 		<form @submit.prevent="addTodo">
 			<label for="newTodo">New Todo</label>
-			<input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+			<input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="" placeholder="Add a todo item">
 			<button type="submit" name="button" >Add</button> 
 		</form>
+
+
 		<button @click="allDone" type="button" name="button">All done</button>
-		<ul>
+		<ol>
 			<li v-for="todo in todos">
+				<!-- <input type="checkbox" v-model="todo.done"> -->
 				<input type="checkbox" v-model="todo.done">
-				<span :class="{ done: todo.done }">{{todo.title}}</span>
+				<span :class="{ done: todo.done }">{{ todo.title }}</span>
 				<button @click="removeTodo(todo)" type="button">remove</button>
 			</li>
-		</ul>
+		</ol>
 	</main>
 	
+	<!-- 
+		vue development version, includes helpful console warnings
+		app.js file reference added
+	-->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="app.js" charset="utf-8"></script>
 </body>
